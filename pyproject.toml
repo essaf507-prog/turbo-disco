@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "paper-style-pipeline"
+version = "0.1.0"
+description = "Extract, analyze, and reuse academic paper writing style from PDF corpora."
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{ name = "Turbo Disco" }]
+dependencies = [
+    "requests>=2.31.0",
+]
+
+[project.optional-dependencies]
+pdf = ["pypdf>=4.0.0"]
+api = ["fastapi>=0.110.0", "uvicorn>=0.27.0"]
+dev = ["ruff>=0.4.0"]
+
+[project.scripts]
+paper-style = "paper_style_pipeline.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["paper_style_pipeline*"]
+
+[tool.ruff]
+line-length = 100
+src = ["paper_style_pipeline", "tests", "scripts"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
